@@ -1,0 +1,20 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Capstone application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Steven Lagrange",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "latest",
+    "body-parser": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "nodemon": "^1.17.2",
+    "vue": "^2.5.16"
+  }
+}
