@@ -9,18 +9,20 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var app = express();
 
-var crawler = {
-  "connected": 1,
-  "message": "Server message 2.0",
-  "servo": 1,
-  "brake": 0,
-  "battery" : 40,
-  "sonar": 8,
-  "wheels": {
-    "fl": 0,
-    "fr": 1,
-    "rl": 0,
-    "rr": 1
+var status = {
+  "crawler": {
+    "connected": 0,
+    "message": "Crawler not connected.",
+    "servo": 0,
+    "brake": 0,
+    "battery" : 0,
+    "sonar": 0,
+    "wheels": {
+      "fl": 0,
+      "fr": 0,
+      "rl": 0,
+      "rr": 0
+    }
   }
 }
 
@@ -39,7 +41,7 @@ app.get('/', function(req, res) {
 
 app.post('/api/update/', function(req, res) {
   /** Update latest crawler data */
-  crawler = req.body.crawler;
+  status.crawler = req.body.crawler;
   res.setHeader('Access-Control-Allow-Methods', 'POST')
   res.sendStatus(200);
 })
@@ -47,8 +49,10 @@ app.post('/api/update/', function(req, res) {
 app.get('/api/status/', function(req, res) {
   /** Return crawler information */
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', 'http://capstone-crawler.s3-website-us-west-2.amazonaws.com/');
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-  res.send(JSON.stringify(crawler));
+  data = JSON.stringify(status)
+  res.send(data);
 })
 
 
